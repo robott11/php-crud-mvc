@@ -154,9 +154,9 @@ class Router
                 //METHOD UNDEFINED
                 throw new Exception("Método não é permitido", 405);
             }
-            //URL NOT FOUND
-            throw new Exception("URL não encontrada", 404);
         }
+        //URL NOT FOUND
+        throw new Exception("URL não encontrada", 404);
     }
 
     /**
