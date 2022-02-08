@@ -9,8 +9,16 @@ $obRouter->get("/", [
     }
 ]);
 
+//ABOUT ROUTE
 $obRouter->get("/sobre", [
     function() {
-        return new Response(200, pages\Home::getHome());
+        return new Response(200, pages\About::getAbout());
+    }
+]);
+
+//DYNAMIC ROUTE
+$obRouter->get("/pagina/{pageId}/{action}", [
+    function($pageId, $action) {
+        return new Response(200, "Página: ".$pageId."<br>Ação: ".$action);
     }
 ]);

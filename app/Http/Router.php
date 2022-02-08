@@ -3,6 +3,7 @@ namespace App\Http;
 
 use \Closure;
 use \Exception;
+use \ReflectionFunction;
 
 class Router
 {
@@ -68,6 +69,16 @@ class Router
                 unset($params[$key]);
                 //continue;
             }
+            //ROUTE VARS
+            $params["variables"] = [];
+            
+            //STANDARD ROUTE VAR VALIDATION
+            $patterVariable = "/{(.*?)}/";
+            if (preg_match_all($patterVariable, $route, $matches)) {
+                $route = preg_replace($patterVariable, "(.*?)", $route);
+                $params["variables"] = $matches[1];
+            }
+
             //STANDARD ROUTE VALIDATION
             $patternRoute = "/^".str_replace("/", "\/", $route)."$/";
             //ADD THE ROUTE TO THE CLASS
@@ -145,9 +156,16 @@ class Router
         //VALIDATES ROUTES
         foreach ($this->routes as $patternRoute => $method) {
             //VERIFY IF ROUTE MATCHES PATTERN
-            if (preg_match($patternRoute, $uri)) {
+            if (preg_match($patternRoute, $uri, $matches)) {
                 //VERIFY METHOD
-                if ($method[$httpMethod]) {
+                if (isset($method[$httpMethod])) {
+                    unset($matches[0]);
+
+                    //PROCESSED VARIABLES
+                    $keys = $method[$httpMethod]["variables"];
+                    $method[$httpMethod]["variables"] = array_combine($keys, $matches);
+                    $method[$httpMethod]["variables"]["request"] = $this->request;
+
                     //RETURNS THE ROUTE PARAMS
                     return $method[$httpMethod];
                 }
@@ -176,6 +194,13 @@ class Router
 
             //ARGS OF THE FUNCTION
             $args = [];
+
+            //REFLECTION
+            $reflection = new ReflectionFunction($route["controller"]);
+            foreach ($reflection->getParameters() as $parameter) {
+                $name = $parameter->getName();
+                $args[$name] = $route["variables"][$name] ?? "";
+            }
 
             //RETURNS THE FUNCTION EXECUTION
             return call_user_func_array($route["controller"], $args);
