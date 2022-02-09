@@ -6,6 +6,7 @@
         }
     },
     "require": {
-        "ralouphie/getallheaders": "^3.0"
+        "ralouphie/getallheaders": "^3.0",
+        "william-costa/dot-env": "^0.1.0"
     }
 }
