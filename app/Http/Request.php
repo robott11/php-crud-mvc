@@ -4,6 +4,13 @@ namespace App\Http;
 class Request
 {
     /**
+     * router instance
+     *
+     * @var Router
+     */
+    private $router;
+
+    /**
      * request HTTP method
      * @var string
      */
@@ -36,13 +43,39 @@ class Request
     /**
      * initiate class and set values
      */
-    public function __construct()
+    public function __construct($router)
     {
+        $this->router      = $router;
         $this->queryParams = $_GET ?? [];
-        $this->queryParams = $_POST ?? [];
-        $this->headers = getallheaders();
-        $this->httpMethod = $_SERVER["REQUEST_METHOD"] ?? "";
+        $this->postVars    = $_POST ?? [];
+        $this->headers     = getallheaders();
+        $this->httpMethod  = $_SERVER["REQUEST_METHOD"] ?? "";
+        $this->setUri();
+    }
+
+    /**
+     * defines the URI
+     *
+     * @return void
+     */
+    private function setUri()
+    {
+        //COMPLETE URI
         $this->uri = $_SERVER["REQUEST_URI"] ?? "";
+
+        //REMOVE URI GETS
+        $xUri = explode("?", $this->uri);
+        $this->uri = $xUri[0];
+    }
+
+    /**
+     * returns the router instance
+     *
+     * @return Router
+     */
+    public function getRouter(): object
+    {
+        return $this->router;
     }
 
     /**
@@ -76,7 +109,7 @@ class Request
      * GET params getter
      * @return array
      */
-    public function getQeuryParams(): array
+    public function getQueryParams(): array
     {
         return $this->queryParams;
     }
