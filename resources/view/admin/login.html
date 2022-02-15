@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center">
+    <div class="card mt-3 text-dark text-center" style="width: 350px;">
+        <div class="card-header">
+            <h2>Login</h2>
+        </div>
+
+        {{status}}
+
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" class="form-control" name="email" placeholder="email@teste.com" required autofocus name="">
+                </div>
+
+                <div class="form-group my-3">
+                    <label>Senha</label>
+                    <input type="password" class="form-control" name="password" placeholder="********" required name="">
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-danger">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>
