@@ -70,25 +70,24 @@ class Router
                 unset($params[$key]);
                 //continue;
             }
-
-            //ROUTE MIDDLEWARES
-            $params["middlewares"] = $params["middlewares"] ?? [];
-
-            //ROUTE VARS
-            $params["variables"] = [];
-            
-            //STANDARD ROUTE VAR VALIDATION
-            $patterVariable = "/{(.*?)}/";
-            if (preg_match_all($patterVariable, $route, $matches)) {
-                $route = preg_replace($patterVariable, "(.*?)", $route);
-                $params["variables"] = $matches[1];
-            }
-
-            //STANDARD ROUTE VALIDATION
-            $patternRoute = "/^".str_replace("/", "\/", $route)."$/";
-            //ADD THE ROUTE TO THE CLASS
-            $this->routes[$patternRoute][$method] = $params;
         }
+        //ROUTE MIDDLEWARES
+        $params["middlewares"] = $params["middlewares"] ?? [];
+
+        //ROUTE VARS
+        $params["variables"] = [];
+        
+        //STANDARD ROUTE VAR VALIDATION
+        $patterVariable = "/{(.*?)}/";
+        if (preg_match_all($patterVariable, $route, $matches)) {
+            $route = preg_replace($patterVariable, "(.*?)", $route);
+            $params["variables"] = $matches[1];
+        }
+
+        //STANDARD ROUTE VALIDATION
+        $patternRoute = "/^".str_replace("/", "\/", $route)."$/";
+        //ADD THE ROUTE TO THE CLASS
+        $this->routes[$patternRoute][$method] = $params;
     }
 
     /**
