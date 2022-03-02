@@ -18,16 +18,14 @@ class Login extends Page
     public static function getLogin(object $request, string|null $errorMessage = null): string
     {
         //STATUS
-        $status = !is_null($errorMessage) ? View::render("admin/login/status", [
-            "message" => $errorMessage
-        ]) : "";
+        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : "";
 
         //LOGIN PAGE CONTENT
         $content = View::render("admin/login", [
             "status" => $status
         ]);
 
-        //RETORNA
+        //RETURN THE PAGE
         return parent::getPage("Admin - Login", $content);
     }
 

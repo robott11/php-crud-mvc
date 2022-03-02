@@ -41,7 +41,7 @@ class Testimony
     public function register(): bool
     {
         //SETS THE DATE
-        $this->date = date("Y-m-d H:i:s");
+        $this->data = date("Y-m-d H:i:s");
 
         //INSERTS THE DATA INTO THE DATABASE
         $this->id = (new Database("depoimentos"))->insert([
@@ -52,6 +52,42 @@ class Testimony
 
         //SUCESS
         return true;
+    }
+
+    /**
+     * update the actual instance on the database
+     *
+     * @return bool
+     */
+    public function update(): bool
+    {
+        //UPDATE THE DATA INTO THE DATABASE
+        return (new Database("depoimentos"))->update("id = ".$this->id, [
+            "nome"     => $this->nome,
+            "mensagem" => $this->mensagem
+        ]);
+    }
+
+    /**
+     * deletes a testiomny from the DB
+     *
+     * @return bool
+     */
+    public function delete(): bool
+    {
+        //DELETE THE TESTIMONY FROM THE DATABASE
+        return (new Database("depoimentos"))->delete("id = ".$this->id);
+    }
+
+    /**
+     * returns a testimony by ID
+     *
+     * @param int $id
+     * @return Testimony
+     */
+    public static function getTestimonyById(int $id): Testimony|bool
+    {
+        return self::getTestimonies("id = ".$id)->fetchObject(self::class);
     }
 
     /**
