@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use \App\Utils\View;
+use \App\Http\Request;
 use \App\Model\Entity\Testimony as EntityTestimony;
 use \WilliamCosta\DatabaseManager\Pagination;
 
@@ -14,7 +16,7 @@ class Testimony extends Page
      * @param Pagination $obPagination
      * @return string
      */
-    private static function getTestimonyItens($request, &$obPagination): string
+    private static function getTestimonyItens(Request $request, &$obPagination): string
     {
         //TESTIMONIES
         $itens = "";
@@ -53,7 +55,7 @@ class Testimony extends Page
      * @param Request $request
      * @return string
      */
-    public static function getTestimonies(object $request): string
+    public static function getTestimonies(Request $request): string
     {
         //HOME CONTENT
         $content = View::render("admin/modules/testimonies/index", [
@@ -72,7 +74,7 @@ class Testimony extends Page
      * @param Request $request
      * @return string
      */
-    public static function getNewTestimony(object $request): string
+    public static function getNewTestimony(Request $request): string
     {
         //FORM CONTENT
         $content = View::render("admin/modules/testimonies/form", [
@@ -92,7 +94,7 @@ class Testimony extends Page
      * @param Request $request
      * @return string
      */
-    public static function setNewTestimony(object $request)
+    public static function setNewTestimony(Request $request)
     {
         //POST VARS
         $postVars = $request->getPostVars();
@@ -113,7 +115,7 @@ class Testimony extends Page
      * @param object $request
      * @return string
      */
-    private static function getStatus(object $request): string
+    private static function getStatus(Request $request): string
     {
         //QUERY PARAMS
         $queryParams = $request->getQueryParams();
@@ -144,7 +146,7 @@ class Testimony extends Page
      * @param int $int
      * @return string
      */
-    public static function getEditTestimony(object $request, int $id): string
+    public static function getEditTestimony(Request $request, int $id): string
     {
         //GETS THE TESTIMONY FROM DB
         $obTestimony = EntityTestimony::getTestimonyById($id);
@@ -173,7 +175,7 @@ class Testimony extends Page
      * @param int $int
      * @return string
      */
-    public static function setEditTestimony(object $request, int $id): string
+    public static function setEditTestimony(Request $request, int $id): string
     {
         //GETS THE TESTIMONY FROM DB
         $obTestimony = EntityTestimony::getTestimonyById($id);
@@ -202,7 +204,7 @@ class Testimony extends Page
      * @param int $int
      * @return string
      */
-    public static function getDeleteTestimony(object $request, int $id): string
+    public static function getDeleteTestimony(Request $request, int $id): string
     {
         //GETS THE TESTIMONY FROM DB
         $obTestimony = EntityTestimony::getTestimonyById($id);
@@ -229,7 +231,7 @@ class Testimony extends Page
      * @param int $int
      * @return string
      */
-    public static function setDeleteTestimony(object $request, int $id): string
+    public static function setDeleteTestimony(Request $request, int $id): string
     {
         //GETS THE TESTIMONY FROM DB
         $obTestimony = EntityTestimony::getTestimonyById($id);

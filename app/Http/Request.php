@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Http;
+
+use \App\Http\Router;
 
 class Request
 {
@@ -12,30 +15,35 @@ class Request
 
     /**
      * request HTTP method
+     * 
      * @var string
      */
     private $httpMethod;
 
     /**
      * page URI
+     * 
      * @var string
      */
     private $uri;
 
     /**
      * url params ($_GET)
+     * 
      * @var array
      */
     private $queryParams = [];
 
     /**
      * received variables from page POST ($_POST)
+     * 
      * @var array
      */
     private $postVars = [];
 
     /**
      * request header
+     * 
      * @var array
      */
     private $headers = [];
@@ -43,7 +51,7 @@ class Request
     /**
      * initiate class and set values
      */
-    public function __construct($router)
+    public function __construct(Router $router)
     {
         $this->router      = $router;
         $this->queryParams = $_GET ?? [];
@@ -73,13 +81,14 @@ class Request
      *
      * @return Router
      */
-    public function getRouter(): object
+    public function getRouter(): Router
     {
         return $this->router;
     }
 
     /**
      * request HTTP method getter
+     * 
      * @return string
      */
     public function getHttpMethod(): string
@@ -89,6 +98,7 @@ class Request
 
     /**
      * request uri getter
+     * 
      * @return string
      */
     public function getUri(): string
@@ -98,6 +108,7 @@ class Request
 
     /**
      * request headers getter
+     * 
      * @return array
      */
     public function getHeaders(): array
@@ -107,6 +118,7 @@ class Request
 
     /**
      * GET params getter
+     * 
      * @return array
      */
     public function getQueryParams(): array
@@ -116,6 +128,7 @@ class Request
 
     /**
      * POST variables getter
+     * 
      * @return array
      */
     public function getPostVars(): array

@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Model\Entity;
 
+use \PDOStatement;
 use \WilliamCosta\DatabaseManager\Database;
 
 class Testimony
@@ -85,7 +87,7 @@ class Testimony
      * @param int $id
      * @return Testimony
      */
-    public static function getTestimonyById(int $id): Testimony|bool
+    public static function getTestimonyById(int $id): Testimony|false
     {
         return self::getTestimonies("id = ".$id)->fetchObject(self::class);
     }
@@ -99,8 +101,12 @@ class Testimony
      * @param string $field
      * @return PDOStatement
      */
-    public static function getTestimonies($where = null, $order = null, $limit = null, $fields = "*")
-    {
+    public static function getTestimonies(
+        string|null $where = null,
+        string|null $order = null,
+        string|null $limit = null,
+        string $fields = "*"
+    ): PDOStatement|false {
         return (new Database("depoimentos"))->select($where, $order, $limit, $fields);
     }
 }

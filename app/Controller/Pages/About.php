@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Pages;
 
 use \App\Utils\View;
@@ -8,6 +9,7 @@ class About extends Page
 {
     /**
      * Method responsible for returning the content(view) of the about page
+     * 
      * @return string
      */
     public static function getAbout(): string

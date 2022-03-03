@@ -1,5 +1,10 @@
 <?php
+
 namespace App\Http\Middleware;
+
+use \Closure;
+use \App\Http\Request;
+use \App\Http\Response;
 
 class Queue
 {
@@ -45,7 +50,7 @@ class Queue
      * @param Closure $controller
      * @param array $controllerArgs
      */
-    public function __construct(array $middlewares, object $controller, array $controllerArgs)
+    public function __construct(array $middlewares, Closure $controller, array $controllerArgs)
     {
         $this->middlewares    = array_merge(self::$default, $middlewares);
         $this->controller     = $controller;
@@ -77,10 +82,10 @@ class Queue
     /**
      * responsible method for executing the next middleware queue level
      *
-     * @param object $request
+     * @param Request $request
      * @return Response
      */
-    public function next(object $request)
+    public function next(Request $request): Response
     {
         //IF THE QUEUE IS EMPTY
         if (empty($this->middlewares)) return call_user_func_array($this->controller, $this->controllerArgs);

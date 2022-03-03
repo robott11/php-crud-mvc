@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use App\Utils\View;
+use App\Http\Request;
 use App\Model\Entity\User;
 use App\Session\Admin\Login as SessionAdminLogin;
 
@@ -15,7 +17,7 @@ class Login extends Page
      * @param string $errorMessage
      * @return string
      */
-    public static function getLogin(object $request, string|null $errorMessage = null): string
+    public static function getLogin(Request $request, string|null $errorMessage = null): string
     {
         //STATUS
         $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : "";
@@ -33,9 +35,9 @@ class Login extends Page
      * login the user
      *
      * @param Request $request
-     * @return
+     * @return string
      */
-    public static function setLogin(object $request)
+    public static function setLogin(Request $request): string
     {
         //POST VARS
         $postVars = $request->getPostVars();
@@ -66,7 +68,7 @@ class Login extends Page
      * @param Request $request
      * @return void
      */
-    public static function setLogout(object $request)
+    public static function setLogout(Request $request): void
     {
         //DESTROY THE ADMIN USER SESSION
         SessionAdminLogin::logout();

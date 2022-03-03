@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use App\Utils\View;
+use \App\Http\Request;
+use \WilliamCosta\DatabaseManager\Pagination;
 
 class Page
 {
@@ -94,7 +97,7 @@ class Page
      * @param Pagination $obPagination
      * @return string
      */
-    public static function getPagination($request, $obPagination): string
+    public static function getPagination(Request $request, Pagination $obPagination): string
     {
         //PAGES
         $pages = $obPagination->getPages();

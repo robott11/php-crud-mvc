@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Session\Admin;
+
+use \App\Model\Entity\User;
 
 class Login
 {
@@ -8,7 +11,7 @@ class Login
      *
      * @return void
      */
-    private static function init()
+    private static function init(): void
     {
         //VERIFY THE SESSION
         if (session_status() != PHP_SESSION_ACTIVE) {
@@ -22,7 +25,7 @@ class Login
      * @param User $obUser
      * @return bool
      */
-    public static function login(object $obUser): bool
+    public static function login(User $obUser): bool
     {
         //START THE SESSION
         self::init();
@@ -40,7 +43,7 @@ class Login
     /**
      * verify if the user is logged
      *
-     * @return boolean
+     * @return bool
      */
     public static function isLogged(): bool
     {

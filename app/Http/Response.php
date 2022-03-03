@@ -1,28 +1,33 @@
 <?php
+
 namespace App\Http;
 
 class Response
 {
     /**
      * HTTP status code
+     * 
      * @var int
      */
     private $httpCode = 200;
 
     /**
      * response header
+     * 
      * @var array
      */
     private $headers = [];
 
     /**
      * Content type being returned
+     * 
      * @var string
      */
     private $contentType = "text/html";
 
     /**
      * response content
+     * 
      * @var mixed
      */
     private $content;
@@ -45,9 +50,11 @@ class Response
 
     /**
      * set the content type of the response
+     * 
      * @param string $contentType  [description]
+     * @return void
      */
-    public function setContentType(string $contentType)
+    public function setContentType(string $contentType): void
     {
         $this->contentType = $contentType;
         $this->addHeader("Content-Type", $contentType);
@@ -55,18 +62,22 @@ class Response
 
     /**
      * add a value to header of the response
+     * 
      * @param string $key
      * @param string $value
+     * @return void
      */
-    public function addHeader(string $key, string $value)
+    public function addHeader(string $key, string $value): void
     {
         $this->headers[$key] = $value;
     }
 
     /**
      * send headers to browser
+     * 
+     * @return void
      */
-    private function sendHeaders()
+    private function sendHeaders(): void
     {
         //STATUS
         http_response_code($this->httpCode);
@@ -79,8 +90,10 @@ class Response
 
     /**
      * send reponse to user
+     * 
+     * @return void
      */
-    public function sendResponse()
+    public function sendResponse(): void
     {
         //SEND HEADERS
         $this->sendHeaders();

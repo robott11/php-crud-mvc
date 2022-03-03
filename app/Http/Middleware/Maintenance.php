@@ -1,5 +1,10 @@
 <?php
+
 namespace App\Http\Middleware;
+
+use \Closure;
+use \App\Http\Request;
+use \App\Http\Response;
 
 class Maintenance 
 {
@@ -10,7 +15,7 @@ class Maintenance
      * @param Closure $next
      * @return Response
      */
-    public function handle(object $request, object $next): object
+    public function handle(Request $request, Closure $next): Response
     {
         //CHECK IF IT IS UNDER MAINTENANCE
         if (getenv("MAINTENANCE") == "true") {

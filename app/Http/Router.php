@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http;
 
 use \Closure;
@@ -10,30 +11,35 @@ class Router
 {
     /**
      * entire project url (root)
+     * 
      * @var string
      */
     private $url = "";
 
     /**
      * prefix of all routers
+     * 
      * @var string
      */
     private $prefix = "";
 
     /**
      * route index
+     * 
      * @var array
      */
     private $routes = [];
 
     /**
      * instance of Request
+     * 
      * @var Request
      */
     private $request;
 
     /**
      * class constructor
+     * 
      * @param string $url
      */
     function __construct(string $url)
@@ -45,8 +51,10 @@ class Router
 
     /**
      * define the route prefix
+     * 
+     * @return void
      */
-    private function setPrefix()
+    private function setPrefix(): void
     {
         //URL INFO
         $parseUrl = parse_url($this->url);
@@ -57,11 +65,13 @@ class Router
 
     /**
      * this will add a route on the class
+     * 
      * @param string $method
      * @param string $route
      * @param array  $params
+     * @return void
      */
-    private function addRoute(string $method, string $route, array $params = [])
+    private function addRoute(string $method, string $route, array $params = []): void
     {
         //PARAMS VALIDATION
         foreach ($params as $key => $value) {
@@ -92,46 +102,55 @@ class Router
 
     /**
      * this will define a GET route
+     * 
      * @param  string $route
      * @param  array $params
+     * @return void
      */
-    public function get(string $route, array $params = [])
+    public function get(string $route, array $params = []): void
     {
         $this->addRoute("GET", $route, $params);
     }
 
     /**
      * this will define a POST route
+     * 
      * @param  string $route
      * @param  array $params
+     * @return void
      */
-    public function post(string $route, array $params = [])
+    public function post(string $route, array $params = []): void
     {
         $this->addRoute("POST", $route, $params);
     }
 
     /**
      * this will define a PUT route
+     * 
      * @param  string $route
      * @param  array $params
+     * @return void
      */
-    public function put(string $route, array $params = [])
+    public function put(string $route, array $params = []): void
     {
         $this->addRoute("PUT", $route, $params);
     }
 
     /**
      * this will define a DELETE route
+     * 
      * @param  string $route
      * @param  array $params
+     * @return void
      */
-    public function delete(string $route, array $params = [])
+    public function delete(string $route, array $params = []): void
     {
         $this->addRoute("DELETE", $route, $params);
     }
 
     /**
      * returns the uri whitout prefix
+     * 
      * @return string
      */
     private function getUri(): string
@@ -148,6 +167,7 @@ class Router
 
     /**
      * gets the current route data
+     * 
      * @return array
      */
     private function getRoute()
@@ -183,9 +203,10 @@ class Router
 
     /**
      * will execute the actual route
+     * 
      * @return Response
      */
-    public function run()
+    public function run(): Response
     {
         try {
             //GET THE CURRENT ROUTE
@@ -230,7 +251,7 @@ class Router
      * @param string $route
      * @return void
      */
-    public function redirect(string $route)
+    public function redirect(string $route): void
     {
         //URL
         $url = $this->url.$route;

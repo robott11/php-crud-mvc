@@ -1,6 +1,10 @@
 <?php
+
 namespace App\Http\Middleware;
 
+use \Closure;
+use \App\Http\Request;
+use \App\Http\Response;
 use \App\Session\Admin\Login as SessionAdminLogin;
 
 class RequireAdminLogin
@@ -12,7 +16,7 @@ class RequireAdminLogin
      * @param Closure $next
      * @return Response
      */
-    public function handle(object $request, object $next): object
+    public function handle(Request $request, Closure $next): Response
     {
         //VERIFY IF THE USER IS LOGGED
         if (!SessionAdminLogin::isLogged()) {

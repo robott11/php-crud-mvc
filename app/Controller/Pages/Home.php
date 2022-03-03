@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Pages;
 
 use \App\Utils\View;
@@ -8,6 +9,7 @@ class Home extends Page
 {
     /**
      * Method responsible for returning the content(view) of the home page
+     * 
      * @return string
      */
     public static function getHome(): string

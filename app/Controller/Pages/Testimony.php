@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller\Pages;
 
 use \App\Utils\View;
+use \App\Http\Request;
 use \App\Model\Entity\Testimony as EntityTestimony;
 use \WilliamCosta\DatabaseManager\Pagination;
 
@@ -14,7 +16,7 @@ class Testimony extends Page
      * @param Pagination $obPagination
      * @return string
      */
-    private static function getTestimonyItens($request, &$obPagination): string
+    private static function getTestimonyItens(Request $request, &$obPagination): string
     {
         //TESTIMONIES
         $itens = "";
@@ -52,7 +54,7 @@ class Testimony extends Page
      * @param Request $request
      * @return string
      */
-    public static function getTestimonies($request): string
+    public static function getTestimonies(Request $request): string
     {
         //TESTIMONY VIEW
         $content = View::render("pages/testimonies", [
@@ -70,7 +72,7 @@ class Testimony extends Page
      * @param Request $request
      * @return string
      */
-    public static function insertTestimony($request): string
+    public static function insertTestimony(Request $request): string
     {
         //POST DATA
         $postVars = $request->getPostVars();

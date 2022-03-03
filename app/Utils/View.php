@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Utils;
 
 class View
@@ -16,13 +17,14 @@ class View
      * @param array $vars
      * @return void
      */
-    public static function init(array $vars = [])
+    public static function init(array $vars = []): void
     {
         self::$vars = $vars;
     }
 
     /**
      * returns the content of a view
+     * 
      * @param  string $view
      * @return string
      */
@@ -34,6 +36,7 @@ class View
 
     /**
      * returns the rendered content of a view
+     * 
      * @param  string $view
      * @param  array $vars (string/numeric)
      * @return string

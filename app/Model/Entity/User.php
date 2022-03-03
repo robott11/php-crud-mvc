@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Model\Entity;
 
+use \PDOStatement;
 use \WilliamCosta\DatabaseManager\Database;
 
 class User
@@ -81,7 +83,7 @@ class User
      * @param int $id
      * @return User
      */
-    public static function getUserById(int $id): User|bool
+    public static function getUserById(int $id): User|false
     {
         return self::getUsers("id = ".$id)->fetchObject(self::class);
     }
@@ -92,7 +94,7 @@ class User
      * @param string $email
      * @return User
      */
-    public static function getUserByEmail(string $email): User|bool
+    public static function getUserByEmail(string $email): User|false
     {
         return self::getUsers("email = '".$email."'")->fetchObject(self::class);
     }
@@ -106,8 +108,12 @@ class User
      * @param string $field
      * @return PDOStatement
      */
-    public static function getUsers($where = null, $order = null, $limit = null, $fields = "*")
-    {
+    public static function getUsers(
+        string|null $where = null,
+        string|null $order = null,
+        string|null $limit = null,
+        string $fields = "*"
+    ): PDOStatement|false {
         return (new Database("usuarios"))->select($where, $order, $limit, $fields);
     }
 }

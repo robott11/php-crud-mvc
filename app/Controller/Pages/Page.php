@@ -1,12 +1,16 @@
 <?php
+
 namespace App\Controller\Pages;
 
 use \App\Utils\View;
+use \App\Http\Request;
+use \WilliamCosta\DatabaseManager\Pagination;
 
 class Page
 {
     /**
      * renders the page header
+     * 
      * @return string
      */
     private static function getHeader(): string
@@ -16,6 +20,7 @@ class Page
 
     /**
      * renders the page footer
+     * 
      * @return string
      */
     private static function getFooter(): string
@@ -30,7 +35,7 @@ class Page
      * @param Pagination $obPagination
      * @return string
      */
-    public static function getPagination($request, $obPagination): string
+    public static function getPagination(Request $request, Pagination $obPagination): string
     {
         //PAGES
         $pages = $obPagination->getPages();
@@ -71,6 +76,7 @@ class Page
 
     /**
      * Method responsible for returning the content(view) of the generic page
+     * 
      * @return string
      */
     public static function getPage(string $title, string $content): string

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use \App\Utils\View;
+use \App\Http\Request;
 use \App\Model\Entity\User as EntityUser;
 use \WilliamCosta\DatabaseManager\Pagination;
 
@@ -14,7 +16,7 @@ class User extends Page
      * @param Pagination $obPagination
      * @return string
      */
-    private static function getUserItens($request, &$obPagination): string
+    private static function getUserItens(Request $request, &$obPagination): string
     {
         //USERS
         $itens = "";
@@ -52,7 +54,7 @@ class User extends Page
      * @param Request $request
      * @return string
      */
-    public static function getUsers(object $request): string
+    public static function getUsers(Request $request): string
     {
         //HOME CONTENT
         $content = View::render("admin/modules/users/index", [
@@ -71,7 +73,7 @@ class User extends Page
      * @param Request $request
      * @return string
      */
-    public static function getNewUser(object $request): string
+    public static function getNewUser(Request $request): string
     {
         //FORM CONTENT
         $content = View::render("admin/modules/users/form", [
@@ -91,7 +93,7 @@ class User extends Page
      * @param Request $request
      * @return string
      */
-    public static function setNewUser(object $request)
+    public static function setNewUser(Request $request)
     {
         //POST VARS
         $postVars = $request->getPostVars();
@@ -120,10 +122,10 @@ class User extends Page
     /**
      * returns the status message
      *
-     * @param object $request
+     * @param Request $request
      * @return string
      */
-    private static function getStatus(object $request): string
+    private static function getStatus(Request $request): string
     {
         //QUERY PARAMS
         $queryParams = $request->getQueryParams();
@@ -158,7 +160,7 @@ class User extends Page
      * @param int $int
      * @return string
      */
-    public static function getEditUser(object $request, int $id): string
+    public static function getEditUser(Request $request, int $id): string
     {
         //GETS THE USER FROM DB
         $obUser = EntityUser::getUserById($id);
@@ -187,7 +189,7 @@ class User extends Page
      * @param int $int
      * @return string
      */
-    public static function setEditUser(object $request, int $id): string
+    public static function setEditUser(Request $request, int $id): string
     {
         //GETS THE USER FROM DB
         $obUser = EntityUser::getUserById($id);
@@ -227,7 +229,7 @@ class User extends Page
      * @param int $int
      * @return string
      */
-    public static function getDeleteUser(object $request, int $id): string
+    public static function getDeleteUser(Request $request, int $id): string
     {
         //GETS THE USER FROM DB
         $obUser = EntityUser::getUserById($id);
@@ -254,7 +256,7 @@ class User extends Page
      * @param int $int
      * @return string
      */
-    public static function setDeleteUser(object $request, int $id): string
+    public static function setDeleteUser(Request $request, int $id): string
     {
         //GETS THE USER FROM DB
         $obUser = EntityUser::getUserById($id);
