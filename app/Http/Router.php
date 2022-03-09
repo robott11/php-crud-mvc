@@ -94,6 +94,9 @@ class Router
             $params["variables"] = $matches[1];
         }
 
+        //REMOVE THE LAST SLASH ON THE ROUTE
+        $route = rtrim($route, "/");
+
         //STANDARD ROUTE VALIDATION
         $patternRoute = "/^".str_replace("/", "\/", $route)."$/";
         //ADD THE ROUTE TO THE CLASS
@@ -162,7 +165,7 @@ class Router
         //todo change srtlen to isset
         $xUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
 
-        return end($xUri);
+        return rtrim(end($xUri), '/');
     }
 
     /**
