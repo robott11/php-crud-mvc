@@ -162,7 +162,7 @@ class Router
         //todo change srtlen to isset
         $xUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
 
-        return end($xUri);
+        return rtrim(end($xUri), '/');
     }
 
     /**
